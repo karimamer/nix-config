@@ -13,5 +13,4 @@ _:
   "enpass"
   "zen-browser"
   "chatbox"
-  "ghostty"
 ]

@@ -15,7 +15,6 @@ let
     ./starship.nix
     ./wezterm.nix
     ./alacritty.nix
-    ./ghostty.nix
   ];
 in
 {
