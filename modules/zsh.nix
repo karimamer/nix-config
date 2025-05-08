@@ -21,6 +21,7 @@
     NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
     PYTHONSTARTUP = "${config.xdg.configHome}/python/pythonrc";
     SSH_HOME = "${config.xdg.configHome}/ssh/ssh_config";
+    CST_LSP="${config.xdg.configHome}/.local/share/uv/tools/cst-lsp/bin";
   };
 
   programs.zsh = {

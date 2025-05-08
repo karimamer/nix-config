@@ -13,4 +13,6 @@ _:
   "enpass"
   "zen-browser"
   "chatbox"
+  "ableton-live-suite"
+  "zed"
 ]
