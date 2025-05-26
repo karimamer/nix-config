@@ -49,7 +49,7 @@ It's recommended to familiarize yourself with the basics of Nix and Flakes for a
 3.  **Apply the Configuration:**
     Once personalized, use the command from the "Usage" section:
     ```bash
-    nix run nix-darwin -- switch --flake .#your-new-hostname --show-trace
+    sudo nix run nix-darwin -- switch --flake .#your-new-hostname --show-trace
     ```
 
 It's highly recommended to review the files, especially `flake.nix` and those in the `modules/` directory, to understand the setup before applying it.
@@ -61,8 +61,10 @@ It's highly recommended to review the files, especially `flake.nix` and those in
 To apply the configuration to your system, run the following command:
 
 ```bash
-nix run nix-darwin -- switch --flake .#earlymoon --show-trace
+sudo nix run nix-darwin -- switch --flake .#earlymoon --show-trace
 ```
+*Note: `sudo` is required because system activation involves changes that need root privileges, such as modifying system files and linking services.*
+
 This command builds the system configuration defined in the Flake and activates it. The `earlymoon` part refers to the hostname specified in the `flake.nix` output. If you change the hostname, you'll need to update it here accordingly.
 
 ### Updating the Configuration
@@ -70,7 +72,7 @@ This command builds the system configuration defined in the Flake and activates 
 To update the Flake inputs (dependencies) and apply the new configuration:
 
 ```bash
-nix flake update && nix run nix-darwin -- switch --flake .#earlymoon --show-trace
+nix flake update && sudo nix run nix-darwin -- switch --flake .#earlymoon --show-trace
 ```
 This first updates all the inputs (like `nixpkgs`, `home-manager`, etc.) to their latest versions as specified in `flake.lock` (or updates the lock file if no specific version is pinned), and then rebuilds and switches to the new configuration.
 
