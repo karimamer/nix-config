@@ -9,10 +9,8 @@ _:
   "raycast"
   "anytype"
   "firefox"
-  "mullvadvpn"
   "enpass"
   "zen-browser"
   "chatbox"
-  "ableton-live-suite"
   "zed"
 ]

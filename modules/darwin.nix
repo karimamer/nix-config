@@ -3,8 +3,8 @@
 {
   system.stateVersion = 5;
 
-  networking.computerName = "earlymoon";
-
+  networking.computerName = "bloodmoon";
+  system.primaryUser = "karim";
   nix.settings.trusted-users = [ "karim" ];
 
   programs.zsh.enable = true;

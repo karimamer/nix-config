@@ -30,7 +30,7 @@
 
   outputs = { nixpkgs, home-manager, darwin, catppuccin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... }: {
     darwinConfigurations = {
-      earlymoon = darwin.lib.darwinSystem {
+      bloodmoon = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           ./modules/darwin.nix

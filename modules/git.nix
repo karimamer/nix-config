@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
-  name = "karim";
-  email = "karim@karim.amer.sa@gmail.com";
+  name = "karimamer";
+  email = "karim.amer.sa@gmail.com";
 in
 {
   programs.git = {
