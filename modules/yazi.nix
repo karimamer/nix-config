@@ -4,11 +4,11 @@
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
+  };
 
-    };
+  catppuccin.yazi = {
+    enable = true;
+    flavor = "mocha";
   };
 
 }

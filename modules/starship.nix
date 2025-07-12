@@ -19,12 +19,6 @@ in
     enable = true;
     enableZshIntegration = true;
 
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-
-    };
-
     settings = {
       scan_timeout = 10;
 
@@ -72,5 +66,10 @@ in
       };
 
     };
+  };
+
+  catppuccin.starship = {
+    enable = true;
+    flavor = "mocha";
   };
 }

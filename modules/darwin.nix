@@ -5,7 +5,10 @@
 
   networking.computerName = "bloodmoon";
   system.primaryUser = "karim";
-  nix.settings.trusted-users = [ "karim" ];
+  nix.settings = {
+    trusted-users = [ "karim" ];
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   programs.zsh.enable = true;
 

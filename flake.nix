@@ -1,7 +1,7 @@
 {
   description = "karim's macos config";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +53,7 @@
             home-manager.users.karim = { config, pkgs, ... }: {
               imports = [
                 ./modules
-                catppuccin.homeManagerModules.catppuccin
+                catppuccin.homeModules.catppuccin
               ];
             };
 
@@ -65,7 +65,7 @@
                 "homebrew/homebrew-cask" = homebrew-cask;
                 "homebrew/homebrew-bundle" = homebrew-bundle;
               };
-              mutableTaps = false;
+              mutableTaps = true;
               autoMigrate = true;
               enableRosetta = true;
             };

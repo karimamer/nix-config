@@ -16,7 +16,7 @@ in
     zip
     duckdb
     ollama
-
+    claude-code
     # Cloud-related tools and SDKs
     docker
     docker-compose
@@ -47,6 +47,9 @@ in
     # macOS specific
     arc-browser
     dockutil
+    # lisp
+    racket-minimal
+    chez
 
     mkalias
   ] ++ fontPackages;
