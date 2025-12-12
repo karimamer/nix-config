@@ -6,6 +6,7 @@ let
     ./ssh.nix
     ./pkgs.nix
     ./yazi.nix
+    ./zed.nix
     ./zoxide.nix
     ./fastfetch.nix
     ./fzf.nix

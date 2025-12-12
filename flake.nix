@@ -13,61 +13,29 @@
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { nixpkgs, home-manager, darwin, catppuccin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... }: {
+  outputs = { nixpkgs, home-manager, darwin, catppuccin, nix-homebrew, ... }: {
     darwinConfigurations = {
       bloodmoon = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           ./modules/darwin.nix
+          ./modules/homebrew.nix
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
-          ({ config, pkgs, lib, ... }: {
-            # System-level Homebrew configuration
-            homebrew = {
-              enable = true;
-              onActivation = {
-                autoUpdate = true;
-                cleanup = "uninstall";
-                upgrade = true;
-              };
-              casks = import ./modules/casks.nix { inherit pkgs lib; };
-            };
+          ({ config, pkgs, ... }: {
             nixpkgs.config.allowUnfree = true;
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.users.karim = { config, pkgs, ... }: {
               imports = [
                 ./modules
                 catppuccin.homeModules.catppuccin
               ];
-            };
-
-            nix-homebrew = {
-              enable = true;
-              user = "karim";
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-              mutableTaps = true;
-              autoMigrate = true;
-              enableRosetta = true;
             };
 
             users.users.karim = {

@@ -32,7 +32,7 @@ A comprehensive, declarative macOS development environment built with Nix Flakes
 - **Text Processing**: jq, jnv (interactive JSON), hunspell
 
 ### Applications (via Homebrew)
-- **Browsers**: Firefox, Zen Browser, Arc Browser
+- **Browsers**: Firefox, Zen Browser
 - **Communication**: Discord, Zoom, Chatbox
 - **Productivity**: Raycast, Anytype, Obsidian, Spotify
 - **Development**: Zed editor, Docker Desktop
@@ -92,7 +92,7 @@ A comprehensive, declarative macOS development environment built with Nix Flakes
 sudo nix run nix-darwin -- switch --flake .#your-hostname --show-trace
 
 # Update all inputs and apply
-nix flake update && sudo nix run nix-darwin -- switch --flake .#your-hostname --show-trace
+nix flake update && sudo nix run nix-darwin -- switch --flake .#bloodmoon --show-trace
 ```
 
 ### Key Bindings & Shortcuts

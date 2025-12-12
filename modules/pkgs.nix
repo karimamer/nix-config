@@ -37,7 +37,6 @@ in
     # Python packages
     pyenv
     uv
-    obsidian
 
     # Rust
     rustup
@@ -45,10 +44,9 @@ in
     cargo-generate
 
     # macOS specific
-    arc-browser
     dockutil
     # lisp
-    racket-minimal
+    # racket-minimal  # Temporarily disabled due to build failure
     chez
 
     mkalias

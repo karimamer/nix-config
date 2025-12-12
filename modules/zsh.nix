@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  # Enable Catppuccin theme
+  catppuccin = {
+    enable = true;
+    flavor = "mocha"; # Options: latte, frappe, macchiato, mocha
+    accent = "mauve"; # Options: rosewater, flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
     KEYTIMEOUT = 15;
@@ -27,7 +34,12 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
+
+    # Enable syntax highlighting with Catppuccin theme
+    syntaxHighlighting = {
+      enable = true;
+    };
 
     history = {
       path = "${config.xdg.dataHome}/zsh/zsh_history";
@@ -56,33 +68,44 @@
       "..." = "cd ../../";
     };
 
-    initContent = ''
+    # Load before compinit (useful for plugin managers like zinit)
+    initExtraBeforeCompInit = ''
+      # Disable flow control (Ctrl-S/Ctrl-Q)
       stty -ixon
-      zle -N up-line-or-beginning-search;
-      zle -N down-line-or-beginning-search;
+    '';
 
-      bindkey -v '^?' backward-delete-char;
-      bindkey -M viins 'jj' vi-cmd-mode;
+    initExtra = ''
+      # Register custom zle widgets for history search
+      zle -N up-line-or-beginning-search
+      zle -N down-line-or-beginning-search
+
+      # Vi-mode key bindings
+      bindkey -v '^?' backward-delete-char
+      bindkey -M viins 'jj' vi-cmd-mode
       bindkey -s '^y' '^uyazi\n'
       bindkey -s '^z' '^ufg\n'
 
-
-      function zle-keymap-select() {
+      # Vi-mode cursor shape configuration
+      # Changes cursor shape based on vi mode (beam for insert, block for command)
+      function vi-mode-cursor-shape() {
         case $KEYMAP in
-          vicmd) echo -ne '\e[1 q' ;;        # block
-          viins | main) echo -ne '\e[5 q' ;; # beam
+          vicmd) echo -ne '\e[1 q' ;;        # Block cursor for command mode
+          viins | main) echo -ne '\e[5 q' ;; # Beam cursor for insert mode
         esac
-      };
-      zle-line-init() {
-        zle -K viins
-        echo -ne "\e[5 q"
-      };
+      }
 
-      zle -N zle-keymap-select;
-      zle -N zle-line-init;
+      function vi-mode-init-cursor() {
+        zle -K viins                         # Start in insert mode
+        echo -ne "\e[5 q"                    # Set beam cursor
+      }
 
-      echo -ne '\e[5 q';
-      preexec() { echo -ne '\e[5 q'; };
+      # Register cursor shape functions
+      zle -N zle-keymap-select vi-mode-cursor-shape
+      zle -N zle-line-init vi-mode-init-cursor
+
+      # Ensure beam cursor on startup and before each command
+      echo -ne '\e[5 q'
+      preexec() { echo -ne '\e[5 q'; }
     '';
   };
 }

@@ -6,23 +6,27 @@ in
 {
   programs.git = {
     enable = true;
-    userName = name;
-    userEmail = email;
     ignores = [ ".DS_Store" ];
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = name;
+        email = email;
+      };
+
       init.defaultBranch = "main";
       pull.rebase = true;
       rebase.autoStash = true;
       credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "cache";
+
       core = {
         editor = "nvim";
         autocrlf = "input";
       };
-    };
 
-    aliases = {
-      cl = "clone --depth=1 --filter=blob:none";
+      alias = {
+        cl = "clone --depth=1 --filter=blob:none";
+      };
     };
   };
 }
