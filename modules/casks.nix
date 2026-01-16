@@ -4,6 +4,7 @@ _:
   # Communication
   "discord"
   "zoom"
+  "docker-desktop"
 
   # Productivity
   "spotify"
