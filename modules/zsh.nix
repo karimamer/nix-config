@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Enable Catppuccin theme
@@ -34,6 +34,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    autosuggestion.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
 
     # Enable syntax highlighting with Catppuccin theme
@@ -68,44 +69,47 @@
       "..." = "cd ../../";
     };
 
-    # Load before compinit (useful for plugin managers like zinit)
-    initExtraBeforeCompInit = ''
-      # Disable flow control (Ctrl-S/Ctrl-Q)
-      stty -ixon
-    '';
+    # Use initContent with lib.mkOrder for proper ordering
+    initContent = lib.mkMerge [
+      # Load before compinit (order 550, before compinit at 600)
+      (lib.mkOrder 550 ''
+        # Disable flow control (Ctrl-S/Ctrl-Q)
+        stty -ixon
+      '')
+      # Load after compinit (default order)
+      ''
+        # Register custom zle widgets for history search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
 
-    initExtra = ''
-      # Register custom zle widgets for history search
-      zle -N up-line-or-beginning-search
-      zle -N down-line-or-beginning-search
+        # Vi-mode key bindings
+        bindkey -v '^?' backward-delete-char
+        bindkey -M viins 'jj' vi-cmd-mode
+        bindkey -s '^y' '^uyazi\n'
+        bindkey -s '^z' '^ufg\n'
 
-      # Vi-mode key bindings
-      bindkey -v '^?' backward-delete-char
-      bindkey -M viins 'jj' vi-cmd-mode
-      bindkey -s '^y' '^uyazi\n'
-      bindkey -s '^z' '^ufg\n'
+        # Vi-mode cursor shape configuration
+        # Changes cursor shape based on vi mode (beam for insert, block for command)
+        function vi-mode-cursor-shape() {
+          case $KEYMAP in
+            vicmd) echo -ne '\e[1 q' ;;        # Block cursor for command mode
+            viins | main) echo -ne '\e[5 q' ;; # Beam cursor for insert mode
+          esac
+        }
 
-      # Vi-mode cursor shape configuration
-      # Changes cursor shape based on vi mode (beam for insert, block for command)
-      function vi-mode-cursor-shape() {
-        case $KEYMAP in
-          vicmd) echo -ne '\e[1 q' ;;        # Block cursor for command mode
-          viins | main) echo -ne '\e[5 q' ;; # Beam cursor for insert mode
-        esac
-      }
+        function vi-mode-init-cursor() {
+          zle -K viins                         # Start in insert mode
+          echo -ne "\e[5 q"                    # Set beam cursor
+        }
 
-      function vi-mode-init-cursor() {
-        zle -K viins                         # Start in insert mode
-        echo -ne "\e[5 q"                    # Set beam cursor
-      }
+        # Register cursor shape functions
+        zle -N zle-keymap-select vi-mode-cursor-shape
+        zle -N zle-line-init vi-mode-init-cursor
 
-      # Register cursor shape functions
-      zle -N zle-keymap-select vi-mode-cursor-shape
-      zle -N zle-line-init vi-mode-init-cursor
-
-      # Ensure beam cursor on startup and before each command
-      echo -ne '\e[5 q'
-      preexec() { echo -ne '\e[5 q'; }
-    '';
+        # Ensure beam cursor on startup and before each command
+        echo -ne '\e[5 q'
+        preexec() { echo -ne '\e[5 q'; }
+      ''
+    ];
   };
 }

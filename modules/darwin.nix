@@ -19,6 +19,12 @@
         autohide = false;
     };
 
+    finder = {
+      AppleShowAllExtensions = true;
+      ShowPathbar = true;
+      FXEnableExtensionChangeWarning = false;
+      _FXShowPosixPathInTitle = true;
+    };
 
     CustomUserPreferences."com.apple.screencapture" = {
       location = "~/Documents/screenshots";
@@ -29,6 +35,8 @@
       _HIHideMenuBar = true;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
+      AppleShowAllExtensions = true;
+      ApplePressAndHoldEnabled = false;
     };
 
     SoftwareUpdate = {

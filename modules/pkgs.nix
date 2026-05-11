@@ -7,7 +7,6 @@ in
   home.packages = with pkgs; [
     # General packages for development and system management
     neovim
-    alacritty
     btop
     fastfetch
     openssh
@@ -17,14 +16,13 @@ in
     duckdb
     ollama
     claude-code
-    # Cloud-related tools and SDKs
-    docker
-    docker-compose
+    codex
 
     # Text and terminal utilities
     hunspell
     jq
     ripgrep
+    fd
     tree
     tmux
     just
@@ -33,6 +31,12 @@ in
     eza
     jnv
     aria2
+    hyperfine
+    tokei
+
+    # Git utilities
+    lazygit
+    gh
 
     # Python packages
     pyenv

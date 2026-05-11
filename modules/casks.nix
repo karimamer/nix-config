@@ -2,25 +2,28 @@
 _:
 [
   # Communication
-  "discord"
-  "zoom"
-  "docker-desktop"
+  { name = "discord"; greedy = true; }
+  { name = "zoom"; greedy = true; }
+  { name = "docker-desktop"; greedy = true; }
 
   # Productivity
-  "spotify"
-  "raycast"
-  "anytype"
-  "obsidian"
+  { name = "spotify"; greedy = true; }
+  { name = "raycast"; greedy = true; }
+  { name = "anytype"; greedy = true; }
+  { name = "obsidian"; greedy = true; }
 
   # Browsers
-  "firefox"
-  "zen"
+  { name = "firefox"; greedy = true; }
+  { name = "zen"; greedy = true; }
 
   # Development
-  "zed"
+  { name = "zed"; greedy = true; }
 
   # Utilities
-  "enpass"
-  "chatbox"
-  "sonic-pi"
+  { name = "enpass"; greedy = true; }
+  { name = "chatbox"; }
+  { name = "sonic-pi"; greedy = true; }
+
+  # Terminals
+  { name = "ghostty"; greedy = true; }
 ]

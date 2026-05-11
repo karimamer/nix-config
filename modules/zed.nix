@@ -19,7 +19,7 @@
     # Extra packages available to Zed (e.g., formatters, LSPs)
     extraPackages = with pkgs; [
       nixd          # Nix language server
-      nixfmt-rfc-style  # Nix formatter
+      nixfmt           # Nix formatter
       marksman      # Markdown language server
     ];
 

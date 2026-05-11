@@ -2,6 +2,7 @@
 let
   modules = [
     ./bat.nix
+    ./direnv.nix
     ./git.nix
     ./ssh.nix
     ./pkgs.nix
@@ -16,6 +17,7 @@ let
     ./starship.nix
     ./wezterm.nix
     ./alacritty.nix
+    ./ghostty.nix
   ];
 in
 {

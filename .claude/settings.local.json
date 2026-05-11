@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(darwin-rebuild switch:*)",
+      "Bash(sudo darwin-rebuild switch:*)",
+      "Bash(git -C /Users/karim/.config/nix add:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ]
+  }
+}

@@ -26,7 +26,21 @@ in
 
       alias = {
         cl = "clone --depth=1 --filter=blob:none";
+        st = "status -sb";
+        co = "checkout";
+        br = "branch";
+        lg = "log --oneline --graph --decorate -20";
+        undo = "reset --soft HEAD~1";
       };
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      side-by-side = true;
     };
   };
 }
